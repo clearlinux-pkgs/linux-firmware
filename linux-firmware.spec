@@ -7,7 +7,7 @@ License:        GPL-1.0+ GPL-2.0+ MIT Redistributable,_no_modification_permitted
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-%{commit}.tar.xz
+Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-bfeee58b50208808969bb18b7f297683ba581dc1.tar.xz
 
 %description
 This package includes firmware files required for some devices to
