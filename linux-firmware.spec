@@ -3,7 +3,7 @@
 Name:           linux-firmware
 Version:        20151106
 Release:        1
-License:        GPL-1.0+ GPL-2.0+ MIT Redistributable,_no_modification_permitted
+License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
