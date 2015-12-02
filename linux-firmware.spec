@@ -29,8 +29,12 @@ Licence files from frirmware files
 
 #Copy to .save the wanted firmware files 
 mkdir .save
-cp ath9k_htc/* .save
-cp WHENCE LICENCE.atheros_firmware .save
+##### Atheros ath9k
+cp ath9k_htc/* LICENCE.atheros_firmware .save
+##### Intel Corporation Wireless 7260
+cp iwlwifi-7260*  LICENCE.iwlwifi_firmware .save
+##### Whence file
+cp WHENCE .save
 rm -rf *
 
 %install
@@ -49,6 +53,7 @@ ln -s htc_9271-1.4.0.fw %{buildroot}/usr/lib/firmware/htc_9271.fw
 %defattr(-,root,root,-)
 /usr/lib/firmware/htc_7010*
 /usr/lib/firmware/htc_9271*
+/usr/lib/firmware/iwlwifi-7260*
 
 %files doc
 %defattr(-,root,root,-)
