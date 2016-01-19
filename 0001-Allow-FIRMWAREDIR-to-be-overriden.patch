@@ -1,0 +1,26 @@
+From 989ae78a864c7e1ffa760ad759fd48fb3ce92365 Mon Sep 17 00:00:00 2001
+From: Ikey Doherty <michael.i.doherty@intel.com>
+Date: Tue, 19 Jan 2016 20:07:42 +0000
+Subject: [PATCH] Allow FIRMWAREDIR to be overriden
+
+Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 1b1aa28..e8f86f1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ # This file implements the GNOME Build API:
+ # http://people.gnome.org/~walters/docs/build-api.txt
+ 
+-FIRMWAREDIR = /lib/firmware
++FIRMWAREDIR ?= /lib/firmware
+ 
+ all:
+ 
+-- 
+2.7.0
+

@@ -8,6 +8,7 @@ Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-bfeee58b50208808969bb18b7f297683ba581dc1.tar.xz
+Patch0:         0001-Allow-FIRMWAREDIR-to-be-overriden.patch
 
 %description
 This package includes firmware files required for some devices to
@@ -23,39 +24,20 @@ Licence files from frirmware files
 
 %prep
 %setup -q -n linux-firmware-%{commit}
-
-
-%build
-
-#Copy to .save the wanted firmware files 
-mkdir .save
-##### Atheros ath9k
-cp ath9k_htc/* LICENCE.atheros_firmware .save
-##### Intel Corporation Wireless 7260
-cp iwlwifi-7260*  LICENCE.iwlwifi_firmware .save
-##### Whence file
-cp WHENCE .save
-rm -rf *
+%patch0 -p1
 
 %install
+%make_install FIRMWAREDIR=/usr/lib/firmware
 
-# Create firmware directory 
-mkdir -p %{buildroot}/usr/lib/firmware
-
-# Copy saved files to firmware directory
-cp .save/* %{buildroot}/usr/lib/firmware
-
-# Create link names to firmwares files
-ln -s htc_7010-1.4.0.fw %{buildroot}/usr/lib/firmware/htc_7010.fw
-ln -s htc_9271-1.4.0.fw %{buildroot}/usr/lib/firmware/htc_9271.fw
+# Keep in sync with the doc macro
+find %{buildroot} -name "LICENS*" -or -name "GPL*" -or -name "WHENCE" -exec /bin/rm {} \;
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/firmware/htc_7010*
-/usr/lib/firmware/htc_9271*
-/usr/lib/firmware/iwlwifi-7260*
+/usr/lib/firmware/
+
 
 %files doc
 %defattr(-,root,root,-)
-/usr/lib/firmware/WHENCE
-/usr/lib/firmware/LICEN*
+%doc WHENCE LICENS* GPL*
+
