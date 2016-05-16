@@ -1,4 +1,4 @@
 PKG_NAME := linux-firmware
-URL := https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-bfeee58b50208808969bb18b7f297683ba581dc1.tar.xz
+URL := https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-80d463be829abcee4dbdca8432b9a69452e2021d.tar.xz
 
 include ../common/Makefile.common
