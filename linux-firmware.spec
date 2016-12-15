@@ -1,13 +1,13 @@
-%define commit a4bbc8112cc04fcc0e0861e8b72197b6cb83ab83
+%define commit 91ddce492dc0a6a718396e0c79101087134f622d
 
 Name:           linux-firmware
-Version:        20150619
+Version:        20161215
 Release:        7
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-a4bbc8112cc04fcc0e0861e8b72197b6cb83ab83.tar.xz
+Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-91ddce492dc0a6a718396e0c79101087134f622d.tar.xz
 Patch0:         0001-Allow-FIRMWAREDIR-to-be-overriden.patch
 
 %description
