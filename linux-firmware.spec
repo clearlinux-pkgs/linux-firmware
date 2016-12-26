@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20161215
-Release:        7
+Release:        8
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -35,6 +35,9 @@ find %{buildroot} -name "LICENS*" -or -name "GPL*" -or -name "WHENCE" -exec /bin
 %files
 %defattr(-,root,root,-)
 /usr/lib/firmware/
+%exclude /usr/lib/firmware/check_whence.py
+%exclude /usr/lib/firmware/check_whence.pyc
+%exclude /usr/lib/firmware/check_whence.pyo
 
 
 %files doc
