@@ -2,13 +2,14 @@
 
 Name:           linux-firmware
 Version:        20161215
-Release:        8
+Release:        9
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-91ddce492dc0a6a718396e0c79101087134f622d.tar.xz
 Patch0:         0001-Allow-FIRMWAREDIR-to-be-overriden.patch
+Requires:       linux-firmware-doc
 
 %description
 This package includes firmware files required for some devices to
@@ -27,10 +28,9 @@ Licence files from frirmware files
 %patch0 -p1
 
 %install
+mkdir -p %{buildroot}/usr/share/doc/linux-firmware
+cp WHENCE LICENS* GPL* %{buildroot}/usr/share/doc/linux-firmware
 %make_install FIRMWAREDIR=/usr/lib/firmware
-
-# Keep in sync with the doc macro
-find %{buildroot} -name "LICENS*" -or -name "GPL*" -or -name "WHENCE" -exec /bin/rm {} \;
 
 %files
 %defattr(-,root,root,-)
@@ -42,5 +42,5 @@ find %{buildroot} -name "LICENS*" -or -name "GPL*" -or -name "WHENCE" -exec /bin
 
 %files doc
 %defattr(-,root,root,-)
-%doc WHENCE LICENS* GPL*
+/usr/share/doc/linux-firmware
 
