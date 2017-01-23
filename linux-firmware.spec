@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20161215
-Release:        10
+Release:        11
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -37,6 +37,7 @@ cp WHENCE LICENS* GPL* %{buildroot}/usr/share/doc/linux-firmware
 %make_install FIRMWAREDIR=/usr/lib/firmware
 gcc %{SOURCE10} -o m2u
 ./m2u %{SOURCE11}
+chmod -R a+rx intel-ucode
 cp -a intel-ucode %{buildroot}/usr/lib/firmware
 
 %files
