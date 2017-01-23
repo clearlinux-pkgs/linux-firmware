@@ -2,12 +2,15 @@
 
 Name:           linux-firmware
 Version:        20161215
-Release:        9
+Release:        10
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-91ddce492dc0a6a718396e0c79101087134f622d.tar.xz
+
+Source10:	intel-microcode2ucode.c
+Source11:	microcode.dat
 Patch0:         0001-Allow-FIRMWAREDIR-to-be-overriden.patch
 Requires:       linux-firmware-doc
 
@@ -27,10 +30,14 @@ Licence files from frirmware files
 %setup -q -n linux-firmware-%{commit}
 %patch0 -p1
 
+
 %install
 mkdir -p %{buildroot}/usr/share/doc/linux-firmware
 cp WHENCE LICENS* GPL* %{buildroot}/usr/share/doc/linux-firmware
 %make_install FIRMWAREDIR=/usr/lib/firmware
+gcc %{SOURCE10} -o m2u
+./m2u %{SOURCE11}
+cp -a intel-ucode %{buildroot}/usr/lib/firmware
 
 %files
 %defattr(-,root,root,-)
