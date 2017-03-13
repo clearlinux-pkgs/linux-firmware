@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20161215
-Release:        13
+Release:        14
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -24,6 +24,13 @@ Group:          kernel
 
 %description doc
 Licence files from frirmware files
+
+%package extras
+Summary:        Firmware files used by the Linux kernel
+Group:          kernel
+
+%description extras
+Files from frirmware files
 
 
 %prep
@@ -47,8 +54,20 @@ cp -a intel-ucode %{buildroot}/usr/lib/firmware
 %exclude /usr/lib/firmware/check_whence.pyc
 %exclude /usr/lib/firmware/check_whence.pyo
 
+%exclude /usr/lib/firmware/brcm
+%exclude /usr/lib/firmware/amdgpu
+%exclude /usr/lib/firmware/radeon
+
+
+%files extras
+%defattr(-,root,root,-)
+/usr/lib/firmware/brcm
+/usr/lib/firmware/amdgpu
+/usr/lib/firmware/radeon
+
 
 %files doc
 %defattr(-,root,root,-)
 /usr/share/doc/linux-firmware
+
 
