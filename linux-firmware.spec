@@ -32,6 +32,13 @@ Group:          kernel
 %description extras
 Files from frirmware files
 
+%package wifi
+Summary:        Firmware files used by the Linux kernel
+Group:          kernel
+
+%description wifi
+Files from frirmware files
+
 
 %prep
 %setup -q -n linux-firmware-%{commit}
@@ -46,6 +53,7 @@ gcc %{SOURCE10} -o m2u
 ./m2u %{SOURCE11}
 chmod -R a+rx intel-ucode
 cp -a intel-ucode %{buildroot}/usr/lib/firmware
+rm -f %{buildroot}/usr/lib/firmware/inte-ucode/0f*
 
 %files
 %defattr(-,root,root,-)
@@ -57,13 +65,36 @@ cp -a intel-ucode %{buildroot}/usr/lib/firmware
 %exclude /usr/lib/firmware/brcm
 %exclude /usr/lib/firmware/amdgpu
 %exclude /usr/lib/firmware/radeon
+%exclude /usr/lib/firmware/nvidia
+
+# wifi
+%exclude /usr/lib/firmware/iwl*
+%exclude /usr/lib/firmware/ath10k
+%exclude /usr/lib/firmware/ath6k
+%exclude /usr/lib/firmware/ar3k
+%exclude /usr/lib/firmware/mrvl
+%exclude /usr/lib/firmware/libertas
+%exclude /usr/lib/firmware/ti-connectivity
+%exclude /usr/lib/firmware/*wifi
+
 
 
 %files extras
 %defattr(-,root,root,-)
-/usr/lib/firmware/brcm
 /usr/lib/firmware/amdgpu
 /usr/lib/firmware/radeon
+/usr/lib/firmware/nvidia
+
+%files wifi
+/usr/lib/firmware/iwl*
+/usr/lib/firmware/brcm
+/usr/lib/firmware/ath10k
+/usr/lib/firmware/ath6k
+/usr/lib/firmware/ar3k
+/usr/lib/firmware/mrvl
+/usr/lib/firmware/libertas
+/usr/lib/firmware/ti-connectivity
+/usr/lib/firmware/*wifi
 
 
 %files doc
