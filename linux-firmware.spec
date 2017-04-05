@@ -1,4 +1,4 @@
-%define commit ffdec3f6a5f29eb8a848b6a2417e0a1b45d32fcc
+%define commit 936f3e98847e89f119b24e0fa50f7028d667c744
 
 Name:           linux-firmware
 Version:        20161215
@@ -7,7 +7,7 @@ License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-ffdec3f6a5f29eb8a848b6a2417e0a1b45d32fcc.tar.xz
+Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-936f3e98847e89f119b24e0fa50f7028d667c744.tar.xz
 
 Source10:	intel-microcode2ucode.c
 Source11:	microcode.dat
