@@ -2,16 +2,13 @@
 
 Name:           linux-firmware
 Version:        20161215
-Release:        20
+Release:        21
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-936f3e98847e89f119b24e0fa50f7028d667c744.tar.xz
-
-Source10:	intel-microcode2ucode.c
-Source11:	microcode.dat
-Patch0:         0001-Allow-FIRMWAREDIR-to-be-overriden.patch
+Source10:	https://downloadmirror.intel.com/26798/eng/microcode-20170511.tgz
 Requires:       linux-firmware-doc
 
 %description
@@ -42,18 +39,15 @@ Files from frirmware files
 
 %prep
 %setup -q -n linux-firmware-%{commit}
-%patch0 -p1
 
 
 %install
 mkdir -p %{buildroot}/usr/share/doc/linux-firmware
 cp WHENCE LICENS* GPL* %{buildroot}/usr/share/doc/linux-firmware
 %make_install FIRMWAREDIR=/usr/lib/firmware
-gcc %{SOURCE10} -o m2u
-./m2u %{SOURCE11}
-chmod -R a+rx intel-ucode
+tar -axf %{SOURCE10}
 cp -a intel-ucode %{buildroot}/usr/lib/firmware
-rm -f %{buildroot}/usr/lib/firmware/inte-ucode/0f*
+rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 
 %files
 %defattr(-,root,root,-)
