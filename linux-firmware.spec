@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20161215
-Release:        30
+Release:        31
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
