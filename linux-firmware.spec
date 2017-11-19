@@ -8,7 +8,7 @@ Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-d8fc9909973845dd102e3a323a86c5427d67f8d1.tar.xz
-Source10:	https://downloadmirror.intel.com/26925/eng/microcode-20170707.tgz
+Source10:	https://downloadmirror.intel.com/27337/eng/microcode-20171117.tgz
 Requires:       linux-firmware-doc
 
 %description
