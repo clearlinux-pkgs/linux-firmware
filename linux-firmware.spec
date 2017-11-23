@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20161215
-Release:        31
+Release:        32
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -89,6 +89,9 @@ rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 /usr/lib/firmware/libertas
 /usr/lib/firmware/ti-connectivity
 /usr/lib/firmware/*wifi
+/usr/lib/firmware/amdgpu
+/usr/lib/firmware/radeon
+/usr/lib/firmware/nvidia
 
 
 %files doc
