@@ -1,8 +1,8 @@
 %define commit 9cf0ec08c8fa93ff3aa1cb5f16189735909c3ac6
 
 Name:           linux-firmware
-Version:        20161215
-Release:        39
+Version:        20180000
+Release:        40
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
