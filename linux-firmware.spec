@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20180000
-Release:        42
+Release:        43
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -52,6 +52,7 @@ rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 %files
 %defattr(-,root,root,-)
 /usr/lib/firmware/
+%exclude /usr/lib/firmware/liquidio/lio_23xx_vsw.bin
 %exclude /usr/lib/firmware/check_whence.py
 %exclude /usr/lib/firmware/check_whence.pyc
 %exclude /usr/lib/firmware/check_whence.pyo
