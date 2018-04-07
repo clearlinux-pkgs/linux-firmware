@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20180000
-Release:        43
+Release:        44
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -32,7 +32,7 @@ Files from frirmware files
 %package wifi
 Summary:        Firmware files used by the Linux kernel
 Group:          kernel
-
+Requires:	wireless-regdb-master
 %description wifi
 Files from frirmware files
 
