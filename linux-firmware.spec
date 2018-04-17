@@ -9,6 +9,7 @@ Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-31accdf103b27725b8629ddca8e01c7b0ad22518.tar.gz
 Source10:       https://downloadmirror.intel.com/27591/eng/microcode-20180312.tgz
+Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
 Requires:       linux-firmware-doc
 
 %description
@@ -48,6 +49,8 @@ cp WHENCE LICENS* GPL* %{buildroot}/usr/share/doc/linux-firmware
 tar -axf %{SOURCE10}
 cp -a intel-ucode %{buildroot}/usr/lib/firmware
 rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
+tar -axf %{SOURCE11}
+cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 
 %files
 %defattr(-,root,root,-)
