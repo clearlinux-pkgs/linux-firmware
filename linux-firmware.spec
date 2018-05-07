@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20180000
-Release:        47
+Release:        48
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -51,6 +51,12 @@ cp -a intel-ucode %{buildroot}/usr/lib/firmware
 rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 tar -axf %{SOURCE11}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
+
+
+#
+# All our kernels have the required kernel update for the microcode with caveats
+#
+mv  %{buildroot}/usr/lib/firmware/intel-ucode-with-caveats/06*  %{buildroot}/usr/lib/firmware/intel-ucode/
 
 %files
 %defattr(-,root,root,-)
