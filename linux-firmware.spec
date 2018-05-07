@@ -48,15 +48,17 @@ cp WHENCE LICENS* GPL* %{buildroot}/usr/share/doc/linux-firmware
 %make_install FIRMWAREDIR=/usr/lib/firmware
 tar -axf %{SOURCE10}
 cp -a intel-ucode %{buildroot}/usr/lib/firmware
+
+
+# All our kernels have the required kernel update for the microcode with caveats
+#
+cp  intel-ucode-with-caveats/06*  %{buildroot}/usr/lib/firmware/intel-ucode/
+
+
 rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 tar -axf %{SOURCE11}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 
-
-#
-# All our kernels have the required kernel update for the microcode with caveats
-#
-mv  %{buildroot}/usr/lib/firmware/intel-ucode-with-caveats/06*  %{buildroot}/usr/lib/firmware/intel-ucode/
 
 %files
 %defattr(-,root,root,-)
