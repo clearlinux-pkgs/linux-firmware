@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20180000
-Release:        50
+Release:        51
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -68,13 +68,14 @@ cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 %exclude /usr/lib/firmware/check_whence.pyc
 %exclude /usr/lib/firmware/check_whence.pyo
 
-%exclude /usr/lib/firmware/brcm
+# gpu
 %exclude /usr/lib/firmware/amdgpu
 %exclude /usr/lib/firmware/radeon
 %exclude /usr/lib/firmware/nvidia
 
 # wifi
 %exclude /usr/lib/firmware/iwl*
+%exclude /usr/lib/firmware/brcm
 %exclude /usr/lib/firmware/ath10k
 %exclude /usr/lib/firmware/ath6k
 %exclude /usr/lib/firmware/ar3k
@@ -82,8 +83,6 @@ cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 %exclude /usr/lib/firmware/libertas
 %exclude /usr/lib/firmware/ti-connectivity
 %exclude /usr/lib/firmware/*wifi
-
-
 
 %files extras
 %defattr(-,root,root,-)
@@ -101,10 +100,6 @@ cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 /usr/lib/firmware/libertas
 /usr/lib/firmware/ti-connectivity
 /usr/lib/firmware/*wifi
-/usr/lib/firmware/amdgpu
-/usr/lib/firmware/radeon
-/usr/lib/firmware/nvidia
-
 
 %files doc
 %defattr(-,root,root,-)
