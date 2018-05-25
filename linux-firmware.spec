@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20180000
-Release:        52
+Release:        53
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -10,6 +10,7 @@ Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-112d300c26dfbb9cebbf63781214c007fc203611.tar.gz
 Source10:       https://downloadmirror.intel.com/27776/eng/microcode-20180425.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
+Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-1865.8b946eb.tar.bz2
 Requires:       linux-firmware-doc
 
 %description
@@ -58,6 +59,8 @@ cp  intel-ucode-with-caveats/06*  %{buildroot}/usr/lib/firmware/intel-ucode/
 rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 tar -axf %{SOURCE11}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
+tar -axf %{SOURCE12}
+cp -a ipu4fw-1.0.0-1865.8b946eb/lib/firmware/* %{buildroot}/usr/lib/firmware
 
 
 %files
