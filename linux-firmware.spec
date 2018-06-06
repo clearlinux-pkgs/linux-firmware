@@ -60,7 +60,7 @@ rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 tar -axf %{SOURCE11}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 tar -axf %{SOURCE12}
-cp -a ipu4fw-1.0.0-1865.8b946eb/lib/firmware/* %{buildroot}/usr/lib/firmware
+cp -a ipu4fw-1.0.0-2044.7b37f4e/lib/firmware/* %{buildroot}/usr/lib/firmware
 
 
 %files
