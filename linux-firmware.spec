@@ -61,11 +61,14 @@ tar -axf %{SOURCE11}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 tar -axf %{SOURCE12}
 cp -a ipu4fw-1.0.0-2044.7b37f4e/lib/firmware/* %{buildroot}/usr/lib/firmware
+mkdir -p %{buildroot}/usr/lib/modprobe.d
+cp -a ipu4fw-1.0.0-2044.7b37f4e/etc/modprobe.d/* %{buildroot}/usr/lib/modprobe.d
 
 
 %files
 %defattr(-,root,root,-)
 /usr/lib/firmware/
+/usr/lib/modprobe.d/
 %exclude /usr/lib/firmware/liquidio/lio_23xx_vsw.bin
 %exclude /usr/lib/firmware/check_whence.py
 %exclude /usr/lib/firmware/check_whence.pyc
