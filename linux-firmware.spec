@@ -38,6 +38,13 @@ Requires:	wireless-regdb-master
 %description wifi
 Files from frirmware files
 
+%package ipu4
+Summary:        IPU4 Firmware files used by the Linux kernel
+Group:          kernel
+
+%description ipu4
+Files from ipu4 frirmware
+
 
 %prep
 %setup -q -n linux-firmware-%{commit}
@@ -62,15 +69,16 @@ cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 tar -axf %{SOURCE12}
 
 # Install IPU4
-cp -a ipu4fw-1.0.0-2084.127908d/lib/firmware/* %{buildroot}/usr/lib/firmware
+cp -a ipu4fw-1.0.0-2084.127908d/lib/firmware/ipu4_cpd_b0.bin %{buildroot}/usr/lib/firmware/ipu4_cpd_b0.bin
 mkdir -p %{buildroot}/usr/lib/modprobe.d
-cp  ipu4fw-1.0.0-2084.127908d/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d
+mkdir -p %{buildroot}/usr/lib/modules-load.d
+cp  ipu4fw-1.0.0-2084.127908d/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d/ipu_ops.conf
+cp  ipu4fw-1.0.0-2084.127908d/etc/modules-load.d/ipu.conf %{buildroot}/usr/lib/modules-load.d/ipu.conf
 
 
 %files
 %defattr(-,root,root,-)
 /usr/lib/firmware/
-/usr/lib/modprobe.d/
 %exclude /usr/lib/firmware/liquidio/lio_23xx_vsw.bin
 %exclude /usr/lib/firmware/check_whence.py
 %exclude /usr/lib/firmware/check_whence.pyc
@@ -92,6 +100,11 @@ cp  ipu4fw-1.0.0-2084.127908d/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/m
 %exclude /usr/lib/firmware/ti-connectivity
 %exclude /usr/lib/firmware/*wifi
 
+# IPU4
+%exclude /usr/lib/firmware/ipu4_cpd_b0.bin
+%exclude /usr/lib/modprobe.d/ipu_ops.conf
+%exclude /usr/lib/modules-load.d/ipu.conf
+
 %files extras
 %defattr(-,root,root,-)
 /usr/lib/firmware/amdgpu
@@ -108,6 +121,11 @@ cp  ipu4fw-1.0.0-2084.127908d/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/m
 /usr/lib/firmware/libertas
 /usr/lib/firmware/ti-connectivity
 /usr/lib/firmware/*wifi
+
+%files ipu4
+/usr/lib/firmware/ipu4_cpd_b0.bin
+/usr/lib/modprobe.d/ipu_ops.conf
+/usr/lib/modules-load.d/ipu.conf
 
 %files doc
 %defattr(-,root,root,-)
