@@ -10,7 +10,7 @@ Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-fe4a9d49d44c40a7bc32cdd9529e6a5c8ac92519.tar.gz
 Source10:       https://downloadmirror.intel.com/27776/eng/microcode-20180425.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
-Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2044.7b37f4e.tar.bz2
+Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2084.127908d.tar.bz2
 Requires:       linux-firmware-doc
 
 %description
@@ -60,9 +60,11 @@ rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 tar -axf %{SOURCE11}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 tar -axf %{SOURCE12}
-cp -a ipu4fw-1.0.0-2044.7b37f4e/lib/firmware/* %{buildroot}/usr/lib/firmware
+
+# Install IPU4
+cp -a ipu4fw-1.0.0-2084.127908d/lib/firmware/* %{buildroot}/usr/lib/firmware
 mkdir -p %{buildroot}/usr/lib/modprobe.d
-cp -a ipu4fw-1.0.0-2044.7b37f4e/etc/modprobe.d/* %{buildroot}/usr/lib/modprobe.d
+cp  ipu4fw-1.0.0-2084.127908d/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d
 
 
 %files
