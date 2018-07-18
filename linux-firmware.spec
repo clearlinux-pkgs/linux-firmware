@@ -8,7 +8,7 @@ Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-fe4a9d49d44c40a7bc32cdd9529e6a5c8ac92519.tar.gz
-Source10:       https://downloadmirror.intel.com/27776/eng/microcode-20180703.tgz
+Source10:       https://downloadmirror.intel.com/27945/eng/microcode-20180703.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
 Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2084.127908d.tar.bz2
 Requires:       linux-firmware-doc
