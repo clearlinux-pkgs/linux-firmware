@@ -1,4 +1,5 @@
 %define commit fe4a9d49d44c40a7bc32cdd9529e6a5c8ac92519
+%define ipu4fw ipu4fw-1.0.0-2266.a65f7ca
 
 Name:           linux-firmware
 Version:        20180000
@@ -10,7 +11,7 @@ Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-fe4a9d49d44c40a7bc32cdd9529e6a5c8ac92519.tar.gz
 Source10:       https://downloadmirror.intel.com/28039/eng/microcode-20180807.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
-Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2084.127908d.tar.bz2
+Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2266.a65f7ca.tar.bz2
 Requires:       linux-firmware-doc
 
 %description
@@ -66,14 +67,14 @@ cp  intel-ucode-with-caveats/06*  %{buildroot}/usr/lib/firmware/intel-ucode/
 rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 tar -axf %{SOURCE11}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
-tar -axf %{SOURCE12}
 
 # Install IPU4
-cp -a ipu4fw-1.0.0-2084.127908d/lib/firmware/ipu4_cpd_b0.bin %{buildroot}/usr/lib/firmware/ipu4_cpd_b0.bin
+tar -axf %{SOURCE12}
+cp -a %{ipu4fw}/lib/firmware/ipu4_cpd_b0.bin %{buildroot}/usr/lib/firmware/ipu4_cpd_b0.bin
 mkdir -p %{buildroot}/usr/lib/modprobe.d
 mkdir -p %{buildroot}/usr/lib/modules-load.d
-cp  ipu4fw-1.0.0-2084.127908d/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d/ipu_ops.conf
-cp  ipu4fw-1.0.0-2084.127908d/etc/modules-load.d/ipu.conf %{buildroot}/usr/lib/modules-load.d/ipu.conf
+cp  %{ipu4fw}/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d/ipu_ops.conf
+cp  %{ipu4fw}/etc/modules-load.d/ipu.conf %{buildroot}/usr/lib/modules-load.d/ipu.conf
 
 
 %files
