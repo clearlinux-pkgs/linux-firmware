@@ -1,5 +1,5 @@
 %define commit fe4a9d49d44c40a7bc32cdd9529e6a5c8ac92519
-%define ipu4fw ipu4fw-1.0.0-2266.a65f7ca
+%define ipu4fw ipu4fw-1.0.0-2266.a65f7ca.1
 
 Name:           linux-firmware
 Version:        20180000
@@ -11,7 +11,7 @@ Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-fe4a9d49d44c40a7bc32cdd9529e6a5c8ac92519.tar.gz
 Source10:       https://downloadmirror.intel.com/28039/eng/microcode-20180807.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
-Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2266.a65f7ca.tar.bz2
+Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2266.a65f7ca.1.tar.bz2
 Requires:       linux-firmware-doc
 
 %description
@@ -73,8 +73,10 @@ tar -axf %{SOURCE12}
 cp -a %{ipu4fw}/lib/firmware/ipu4_cpd_b0.bin %{buildroot}/usr/lib/firmware/ipu4_cpd_b0.bin
 mkdir -p %{buildroot}/usr/lib/modprobe.d
 mkdir -p %{buildroot}/usr/lib/modules-load.d
-cp  %{ipu4fw}/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d/ipu_ops.conf
-cp  %{ipu4fw}/etc/modules-load.d/ipu.conf %{buildroot}/usr/lib/modules-load.d/ipu.conf
+cp -a %{ipu4fw}/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d/ipu_ops.conf
+cp -a %{ipu4fw}/etc/modules-load.d/ipu.conf %{buildroot}/usr/lib/modules-load.d/ipu.conf
+cp -a %{ipu4fw}/etc/modules-load.d/ipu_ici  %{buildroot}/usr/lib/modules-load.d/ipu_ici
+cp -a %{ipu4fw}/etc/modules-load.d/ipu_v4l2 %{buildroot}/usr/lib/modules-load.d/ipu_v4l2
 
 
 %files
@@ -127,6 +129,8 @@ cp  %{ipu4fw}/etc/modules-load.d/ipu.conf %{buildroot}/usr/lib/modules-load.d/ip
 /usr/lib/firmware/ipu4_cpd_b0.bin
 /usr/lib/modprobe.d/ipu_ops.conf
 /usr/lib/modules-load.d/ipu.conf
+/usr/lib/modules-load.d/ipu_ici
+/usr/lib/modules-load.d/ipu_v4l2
 
 %files doc
 %defattr(-,root,root,-)
