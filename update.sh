@@ -15,3 +15,5 @@ echo "Updating from $OLDVERSION to $VERSION"
 sed -i "s/$OLDVERSION/$VERSION/g" linux-firmware.spec
 make generateupstream
 git commit -a -m "Update to upstream commit $VERSION"
+make bump
+make koji
