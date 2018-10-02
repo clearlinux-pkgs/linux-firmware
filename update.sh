@@ -12,6 +12,7 @@ fi
 
 echo "Updating from $OLDVERSION to $VERSION"
 
+echo sed -i -e "s/$OLDVERSION/$VERSION/g" linux-firmware.spec
 sed -i -e "s/$OLDVERSION/$VERSION/g" linux-firmware.spec
 make generateupstream
 git commit -a -m "Update to upstream commit $VERSION"
