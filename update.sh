@@ -1,7 +1,7 @@
 #!/bin/bash
 
 unset no_proxy
-VERSION=`curl -s -L  https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/commit/ | grep parent | cut -f6 -d">" | cut -f1 -d"<"`
+VERSION=`curl -s -L  https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/commit/ | grep parent | cut -f6 -d">" | cut -f1 -d"<" | head -1`
 OLDVERSION=`cat linux-firmware.spec | head -1 | cut -f3 -d" "`
 
 echo "--$VERSION--"
