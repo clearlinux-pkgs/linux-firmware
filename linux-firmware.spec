@@ -1,5 +1,5 @@
 %define commit c7ba355ef94cc85c49f14f76a7a826c46fa12ae1
-%define ipu4fw ipu4fw-1.0.0-2266.a65f7ca.1
+%define ipu4fw ipu4fw-1.0.0-2.f61e455
 
 Name:           linux-firmware
 Version:        20180000
@@ -11,7 +11,7 @@ Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-c7ba355ef94cc85c49f14f76a7a826c46fa12ae1.tar.gz
 Source10:       https://downloadmirror.intel.com/28039/eng/microcode-20180807.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
-Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2266.a65f7ca.1.tar.bz2
+Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2.f61e455.tar.bz2
 Requires:       linux-firmware-doc
 
 %description
@@ -71,12 +71,8 @@ cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 # Install IPU4
 tar -axf %{SOURCE12}
 cp -a %{ipu4fw}/lib/firmware/ipu4_cpd_b0.bin %{buildroot}/usr/lib/firmware/ipu4_cpd_b0.bin
-mkdir -p %{buildroot}/usr/lib/modprobe.d
-mkdir -p %{buildroot}/usr/lib/modules-load.d
-cp -a %{ipu4fw}/etc/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d/ipu_ops.conf
-cp -a %{ipu4fw}/etc/modules-load.d/ipu.conf %{buildroot}/usr/lib/modules-load.d/ipu.conf
-cp -a %{ipu4fw}/etc/modules-load.d/ipu_ici  %{buildroot}/usr/lib/modules-load.d/ipu_ici
-cp -a %{ipu4fw}/etc/modules-load.d/ipu_v4l2 %{buildroot}/usr/lib/modules-load.d/ipu_v4l2
+mkdir -p %{buildroot}/usr/share/defaults/etc/modules-load.d
+cp -a %{ipu4fw}/usr/share/defaults/etc/modules-load.d/ipu.conf %{buildroot}/usr/share/defaults/etc/modules-load.d/ipu.conf
 
 
 %files
@@ -105,8 +101,7 @@ cp -a %{ipu4fw}/etc/modules-load.d/ipu_v4l2 %{buildroot}/usr/lib/modules-load.d/
 
 # IPU4
 %exclude /usr/lib/firmware/ipu4_cpd_b0.bin
-%exclude /usr/lib/modprobe.d/ipu_ops.conf
-%exclude /usr/lib/modules-load.d/ipu.conf
+%exclude /usr/share/defaults/etc/modules-load.d/ipu.conf
 
 %files extras
 %defattr(-,root,root,-)
@@ -127,10 +122,7 @@ cp -a %{ipu4fw}/etc/modules-load.d/ipu_v4l2 %{buildroot}/usr/lib/modules-load.d/
 
 %files ipu4
 /usr/lib/firmware/ipu4_cpd_b0.bin
-/usr/lib/modprobe.d/ipu_ops.conf
-/usr/lib/modules-load.d/ipu.conf
-/usr/lib/modules-load.d/ipu_ici
-/usr/lib/modules-load.d/ipu_v4l2
+/usr/share/defaults/etc/modules-load.d/ipu.conf
 
 %files doc
 %defattr(-,root,root,-)
