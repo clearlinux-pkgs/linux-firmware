@@ -1,5 +1,5 @@
 %define commit 117d21157c55293fdaaef06f64e8c44ea9332308
-%define ipu4fw ipu4fw-1.0.0-2.f61e455.1
+%define ipu4fw ipu4fw-1.0.0-*
 
 Name:           linux-firmware
 Version:        20180000
