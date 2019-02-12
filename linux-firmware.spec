@@ -1,4 +1,4 @@
-%define commit bc656509a3cfb60fcdfc905d7e23c18873e4e7b9
+%define commit f30a319bc026e30c4a3671dd997fb7ef5f137f7f
 %define ipu4fw ipu4fw-1.0.0-*
 
 Name:           linux-firmware
@@ -8,7 +8,7 @@ License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-bc656509a3cfb60fcdfc905d7e23c18873e4e7b9.tar.gz
+Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-f30a319bc026e30c4a3671dd997fb7ef5f137f7f.tar.gz
 Source10:       https://downloadmirror.intel.com/28039/eng/microcode-20180807.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
 Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2874.a95c4ef.tar.gz
