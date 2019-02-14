@@ -78,6 +78,8 @@ cp -a %{ipu4fw}/usr/lib/modules-load.d/ipu_ici  %{buildroot}/usr/lib/modules-loa
 cp -a %{ipu4fw}/usr/lib/modules-load.d/ipu_v4l2 %{buildroot}/usr/lib/modules-load.d/ipu_v4l2
 cp -a %{ipu4fw}/usr/lib/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d/ipu_ops.conf
 
+# Remove unmaintained firmware
+rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
 
 %files
 %defattr(-,root,root,-)
