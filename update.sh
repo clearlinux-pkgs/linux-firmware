@@ -15,7 +15,7 @@ echo "Updating from $OLDVERSION to $VERSION"
 
 echo sed -i -e "s/$OLDVERSION/$VERSION/g" linux-firmware.spec
 sed -i -e "s/$OLDVERSION/$VERSION/g" linux-firmware.spec
-make generateupstream
+make generateupstream || { 2>&1 echo "Some upstream URLs cannot be fetched."; exit 1; }
 git commit -a -m "Update to upstream commit $VERSION"
 make bump
 make koji
