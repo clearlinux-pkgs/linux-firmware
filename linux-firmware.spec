@@ -1,5 +1,4 @@
 %define commit efd2c1cc375cff1c17b4259d99a7fee240c3b510
-%define ipu4fw ipu4fw-1.0.0-*
 
 Name:           linux-firmware
 Version:        20180000
@@ -11,7 +10,6 @@ Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-efd2c1cc375cff1c17b4259d99a7fee240c3b510.tar.gz
 Source10:       https://downloadmirror.intel.com/28039/eng/microcode-20180807.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
-Source12:       http://localhost/cgit/projects/ipu4fw/snapshot/ipu4fw-1.0.0-2874.a95c4ef.tar.gz
 Requires:       linux-firmware-doc
 
 %description
@@ -39,13 +37,6 @@ Requires:	wireless-regdb-master
 %description wifi
 Files from frirmware files
 
-%package ipu4
-Summary:        IPU4 Firmware files used by the Linux kernel
-Group:          kernel
-
-%description ipu4
-Files from ipu4 frirmware
-
 
 %prep
 %setup -q -n linux-firmware-%{commit}
@@ -68,15 +59,6 @@ rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 tar -axf %{SOURCE11}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 
-# Install IPU4
-tar -axf %{SOURCE12}
-cp -a %{ipu4fw}/lib/firmware/ipu4_cpd_b0.bin %{buildroot}/usr/lib/firmware/ipu4_cpd_b0.bin
-mkdir -p %{buildroot}/usr/lib/modules-load.d
-mkdir -p %{buildroot}/usr/lib/modprobe.d
-cp -a %{ipu4fw}/usr/lib/modules-load.d/ipu.conf %{buildroot}/usr/lib/modules-load.d/ipu.conf
-cp -a %{ipu4fw}/usr/lib/modules-load.d/ipu_ici  %{buildroot}/usr/lib/modules-load.d/ipu_ici
-cp -a %{ipu4fw}/usr/lib/modules-load.d/ipu_v4l2 %{buildroot}/usr/lib/modules-load.d/ipu_v4l2
-cp -a %{ipu4fw}/usr/lib/modprobe.d/ipu_ops.conf %{buildroot}/usr/lib/modprobe.d/ipu_ops.conf
 
 # Remove unmaintained firmware
 rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
@@ -105,12 +87,6 @@ rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
 %exclude /usr/lib/firmware/ti-connectivity
 %exclude /usr/lib/firmware/*wifi
 
-# IPU4
-%exclude /usr/lib/modules-load.d/ipu.conf
-/usr/lib/firmware/ipu4_cpd_b0.bin
-/usr/lib/modules-load.d/ipu_ici
-/usr/lib/modules-load.d/ipu_v4l2
-/usr/lib/modprobe.d/ipu_ops.conf
 
 %files extras
 %defattr(-,root,root,-)
@@ -128,9 +104,6 @@ rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
 /usr/lib/firmware/libertas
 /usr/lib/firmware/ti-connectivity
 /usr/lib/firmware/*wifi
-
-%files ipu4
-/usr/lib/modules-load.d/ipu.conf
 
 %files doc
 %defattr(-,root,root,-)
