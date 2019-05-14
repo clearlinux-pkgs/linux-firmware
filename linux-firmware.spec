@@ -1,4 +1,4 @@
-%define commit 7536c3be0f0dc6af3f4076730166cbb656962036
+%define commit 1f8ebdfc2634944cc70c1ca3b4f167e39a7109c1
 
 Name:           linux-firmware
 Version:        20180000
@@ -7,7 +7,7 @@ License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-7536c3be0f0dc6af3f4076730166cbb656962036.tar.gz
+Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-1f8ebdfc2634944cc70c1ca3b4f167e39a7109c1.tar.gz
 Source10:       https://downloadmirror.intel.com/28039/eng/microcode-20180807.tgz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
 Requires:       linux-firmware-doc
