@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20180000
-Release:        112
+Release:        113
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -69,9 +69,13 @@ rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
 
 # Create the i915 CPIO file
 mkdir -p %{buildroot}/usr/lib/initrd.d
+ln -s  usr/lib %{buildroot}/lib
 mkdir -p cpio/usr/lib/firmware/i915
-# copy only dmc for now
-cp -a %{buildroot}/usr/lib/firmware/i915/*_dmc_* cpio/usr/lib/firmware/i915
+mkdir -p cpio/usr/lib/firmware/intel-ucode
+# copy intel-ucode and dmc
+cp -a %{buildroot}/usr/lib/firmware/i915/*_dmc_*  cpio/usr/lib/firmware/i915
+cp -a %{buildroot}/usr/lib/firmware/intel-ucode/* cpio/usr/lib/firmware/intel-ucode
+# copy ucode
 (
   cd cpio
   find . | cpio --create --format=newc \
