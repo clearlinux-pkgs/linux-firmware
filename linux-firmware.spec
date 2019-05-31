@@ -2,7 +2,7 @@
 
 Name:           linux-firmware
 Version:        20180000
-Release:        114
+Release:        115
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -45,6 +45,13 @@ Group:          kernel
 %description i915-cpio
 CPIO file from i915 frirmware files
 
+%package ucode-cpio
+Summary:        cpio file with intel-ucode file
+Group:          kernel
+
+%description ucode-cpio
+CPIO file containing Intel microcode file, needed for early load
+
 %prep
 %setup -q -n linux-firmware-%{commit}
 
@@ -70,15 +77,22 @@ rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
 # Create the i915 CPIO file
 mkdir -p %{buildroot}/usr/lib/initrd.d
 mkdir -p cpio/usr/lib/firmware/i915
-mkdir -p cpio/usr/lib/firmware/intel-ucode
 ln    -s usr/lib  cpio/lib
-# copy intel-ucode and dmc
+# copy the i915 DMC binaries
 cp -a %{buildroot}/usr/lib/firmware/i915/*_dmc_*  cpio/usr/lib/firmware/i915
-cp -a %{buildroot}/usr/lib/firmware/intel-ucode/* cpio/usr/lib/firmware/intel-ucode
 (
   cd cpio
   find . | cpio --create --format=newc \
     | xz --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.xz
+)
+
+# Create the intel-ucode CPIO file (cannot be compressed)
+# See: https://www.kernel.org/doc/html/latest/x86/microcode.html
+mkdir -p intel-ucode-cpio/kernel/x86/microcode
+cat %{buildroot}/usr/lib/firmware/intel-ucode/* > intel-ucode-cpio/kernel/x86/microcode/GenuineIntel.bin
+(
+  cd intel-ucode-cpio
+  find . | cpio --create --format=newc --owner=0:0 > %{buildroot}/usr/lib/initrd.d/00-intel-ucode.cpio
 )
 
 %files
@@ -129,3 +143,7 @@ cp -a %{buildroot}/usr/lib/firmware/intel-ucode/* cpio/usr/lib/firmware/intel-uc
 %files i915-cpio
 %defattr(-,root,root,-)
 /usr/lib/initrd.d/i915-firmware.cpio.xz
+
+%files ucode-cpio
+%defattr(-,root,root,-)
+/usr/lib/initrd.d/00-intel-ucode.cpio
