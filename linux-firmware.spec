@@ -69,9 +69,9 @@ rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
 
 # Create the i915 CPIO file
 mkdir -p %{buildroot}/usr/lib/initrd.d
-mkdir -p cpio/usr/lib/firmware
+mkdir -p cpio/usr/lib/firmware/i915
 # copy only dmc for now
-cp -a %{buildroot}/usr/lib/firmware/i915/*_dmc_* cpio/usr/lib/firmware
+cp -a %{buildroot}/usr/lib/firmware/i915/*_dmc_* cpio/usr/lib/firmware/i915
 (
   cd cpio
   find . | cpio --create --format=newc \
