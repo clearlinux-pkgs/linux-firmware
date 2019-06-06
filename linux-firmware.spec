@@ -6,7 +6,7 @@ Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20190514.tar.gz
-Source10:       https://downloadmirror.intel.com/28039/eng/microcode-20180807.tgz
+Source10:       https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/microcode-20190514a.tar.gz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
 Requires:       linux-firmware-doc
 
@@ -26,7 +26,7 @@ Summary:        Firmware files used by the Linux kernel
 Group:          kernel
 
 %description extras
-Files from frirmware files
+Files from firmware files
 
 %package wifi
 Summary:        Firmware files used by the Linux kernel
@@ -59,11 +59,11 @@ mkdir -p %{buildroot}/usr/share/doc/linux-firmware
 cp WHENCE LICENS* GPL* %{buildroot}/usr/share/doc/linux-firmware
 %make_install FIRMWAREDIR=/usr/lib/firmware
 tar -axf %{SOURCE10}
-cp -a intel-ucode %{buildroot}/usr/lib/firmware
+cp -a Intel-Linux-Processor-Microcode-Data-Files-microcode-*/intel-ucode %{buildroot}/usr/lib/firmware
 
 # All our kernels have the required kernel update for the microcode with caveats
 #
-cp  intel-ucode-with-caveats/06*  %{buildroot}/usr/lib/firmware/intel-ucode/
+cp  Intel-Linux-Processor-Microcode-Data-Files-microcode-*/intel-ucode-with-caveats/06*  %{buildroot}/usr/lib/firmware/intel-ucode/
 
 rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
 tar -axf %{SOURCE11}
