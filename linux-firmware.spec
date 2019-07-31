@@ -1,6 +1,6 @@
 Name:           linux-firmware
 Version:        20190731
-Release:        121
+Release:        122
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -51,7 +51,7 @@ Group:          kernel
 CPIO file containing Intel microcode file, needed for early load
 
 %prep
-%setup -q -n linux-firmware-%{version}
+%setup -q -n linux-firmware-dff98c6c57383fe343407bcb7b6e775e0b87274f
 
 
 %install
