@@ -41,7 +41,14 @@ Summary:        cpio file with i915 firmware files
 Group:          kernel
 
 %description i915-cpio
-CPIO file from i915 frirmware files
+CPIO file from i915 firmware files
+
+%package qat-cpio
+Summary:        cpio file with Intel QuickAssist firmware files
+Group:          kernel
+
+%description qat-cpio
+CPIO file from qat_* firmware files
 
 %package ucode-cpio
 Summary:        cpio file with intel-ucode file
@@ -84,6 +91,13 @@ cp -a %{buildroot}/usr/lib/firmware/i915/*_dmc_*  cpio/usr/lib/firmware/i915
     | xz --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.xz
 )
 
+mkdir -p intel-qat-cpio/usr/lib/firmware/
+cp -a %{buildroot}/usr/lib/firmware/qat_*  intel-qat-cpio/usr/lib/firmware/
+(
+  cd intel-qat-cpio
+  find . | cpio --create --format=newc \
+    | xz --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/qat-firmware.cpio.xz
+)
 # Create the intel-ucode CPIO file (cannot be compressed)
 # See: https://www.kernel.org/doc/html/latest/x86/microcode.html
 mkdir -p intel-ucode-cpio/kernel/x86/microcode
@@ -141,6 +155,10 @@ cat %{buildroot}/usr/lib/firmware/intel-ucode/* > intel-ucode-cpio/kernel/x86/mi
 %files i915-cpio
 %defattr(-,root,root,-)
 /usr/lib/initrd.d/i915-firmware.cpio.xz
+
+%files qat-cpio
+%defattr(-,root,root,-)
+/usr/lib/initrd.d/qat-firmware.cpio.xz
 
 %files ucode-cpio
 %defattr(-,root,root,-)
