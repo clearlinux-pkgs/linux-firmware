@@ -131,6 +131,51 @@ cat %{buildroot}/usr/lib/firmware/intel-ucode/* > intel-ucode-cpio/kernel/x86/mi
 %exclude /usr/lib/firmware/ti-connectivity
 %exclude /usr/lib/firmware/*wifi
 
+# these are in alsa-firmware instead
+%exclude /usr/lib/aica_firmware.bin
+%exclude /usr/lib/asihpi/dsp5000.bin
+%exclude /usr/lib/asihpi/dsp6200.bin
+%exclude /usr/lib/asihpi/dsp6205.bin
+%exclude /usr/lib/asihpi/dsp6400.bin
+%exclude /usr/lib/asihpi/dsp6600.bin
+%exclude /usr/lib/asihpi/dsp8700.bin
+%exclude /usr/lib/asihpi/dsp8900.bin
+%exclude /usr/lib/cs46xx/ba1
+%exclude /usr/lib/cs46xx/cwc4630
+%exclude /usr/lib/cs46xx/cwcasync
+%exclude /usr/lib/cs46xx/cwcbinhack
+%exclude /usr/lib/cs46xx/cwcdma
+%exclude /usr/lib/cs46xx/cwcsnoop
+%exclude /usr/lib/ctefx-desktop.bin
+%exclude /usr/lib/ctefx-r3di.bin
+%exclude /usr/lib/ctefx.bin
+%exclude /usr/lib/ctspeq.bin
+%exclude /usr/lib/digiface_firmware.bin
+%exclude /usr/lib/digiface_firmware_rev11.bin
+%exclude /usr/lib/ea/*
+%exclude /usr/lib/emu/*
+%exclude /usr/lib/ess/maestro3_assp_kernel.fw
+%exclude /usr/lib/ess/maestro3_assp_minisrc.fw
+%exclude /usr/lib/korg/k1212.dsp
+%exclude /usr/lib/mixart/miXart8.elf
+%exclude /usr/lib/mixart/miXart8.xlx
+%exclude /usr/lib/mixart/miXart8AES.xlx
+%exclude /usr/lib/multiface_firmware.bin
+%exclude /usr/lib/multiface_firmware_rev11.bin
+%exclude /usr/lib/pcxhr/*
+%exclude /usr/lib/rpm_firmware.bin
+%exclude /usr/lib/sb16/alaw_main.csp
+%exclude /usr/lib/sb16/ima_adpcm_capture.csp
+%exclude /usr/lib/sb16/ima_adpcm_init.csp
+%exclude /usr/lib/sb16/ima_adpcm_playback.csp
+%exclude /usr/lib/sb16/mulaw_main.csp
+%exclude /usr/lib/turtlebeach/msndinit.bin
+%exclude /usr/lib/turtlebeach/msndperm.bin
+%exclude /usr/lib/turtlebeach/pndsperm.bin
+%exclude /usr/lib/turtlebeach/pndspini.bin
+%exclude /usr/lib/vx/*
+%exclude /usr/lib/yamaha/*
+
 %files extras
 %defattr(-,root,root,-)
 /usr/lib/firmware/amdgpu
