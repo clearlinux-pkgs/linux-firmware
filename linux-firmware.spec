@@ -1,6 +1,6 @@
 Name:           linux-firmware
 Version:        20191215
-Release:        129
+Release:        130
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
