@@ -1,13 +1,28 @@
 Name:           linux-firmware
 Version:        20200122
-Release:        132
+Release:        133
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
 Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20200122.tar.gz
 Source10:       https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/microcode-20191115.tar.gz
-Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
+Source20:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
+Source30:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-apl-v1.4.2.ldc
+Source31:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-apl-v1.4.2.ri
+Source32:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-bdw.ldc
+Source33:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-bdw.ri
+Source34:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-byt.ldc
+Source35:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-byt.ri
+Source36:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-cht.ldc
+Source37:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-cht.ri
+Source38:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-cnl-v1.4.2.ldc
+Source39:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-cnl-v1.4.2.ri
+Source40:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-icl-v1.4.2.ldc
+Source41:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-icl-v1.4.2.ri
+Source42:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-imx8.ldc
+Source43:       https://github.com/thesofproject/sof/releases/download/v1.4.2/sof-imx8.ri
+
 Requires:       linux-firmware-doc
 
 %description
@@ -73,8 +88,14 @@ cp -a Intel-Linux-Processor-Microcode-Data-Files-microcode-*/intel-ucode %{build
 cp  Intel-Linux-Processor-Microcode-Data-Files-microcode-*/intel-ucode-with-caveats/06*  %{buildroot}/usr/lib/firmware/intel-ucode/
 
 rm -f %{buildroot}/usr/lib/firmware/intel-ucode/0f*
-tar -axf %{SOURCE11}
+tar -axf %{SOURCE20}
 cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
+
+# SOF
+mkdir -p %{buildroot}/usr/lib/firmware/intel/sof
+cp %{SOURCE30} %{SOURCE31} %{SOURCE32} %{SOURCE33} %{SOURCE34} %{SOURCE35} %{SOURCE36} \
+   %{SOURCE37} %{SOURCE38} %{SOURCE39} %{SOURCE40} %{SOURCE41} %{SOURCE42} %{SOURCE43} \
+     %{buildroot}/usr/lib/firmware/intel/sof/
 
 # Remove unmaintained firmware
 rm -f %{buildroot}/usr/lib/firmware/phanfw.bin

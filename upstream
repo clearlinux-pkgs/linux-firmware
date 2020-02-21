@@ -1,3 +1,17 @@
 82c457a2df4dd4405aceb5dfb8ff17fbc07656e9/linux-firmware-20200122.tar.gz
 774636f4d440623b0ee6a2dad65260e81208074d/microcode-20191115.tar.gz
 073f760037a7df2ed12c6f7a3864ef27edd3b2bf/v1.1-apl.tar.gz
+20ae337aea515dc6dc6052b8c1b6f2e541b7c0bb/sof-apl-v1.4.2.ldc
+4abf35afd7303eb6334009b8b2f2f9acdb3da9ef/sof-apl-v1.4.2.ri
+8e7f32c32b2bd072abf6f7272e18c9f22048e13f/sof-bdw.ldc
+0b182c288d2fc0aa5fefa94ac3f5a0e9084c7bbc/sof-bdw.ri
+d7a0b2af49bc1ecbea51f98baf764b682dd63b2f/sof-byt.ldc
+3c16d1358cba396f725f8343d4bcad5adbda340d/sof-byt.ri
+d7a0b2af49bc1ecbea51f98baf764b682dd63b2f/sof-cht.ldc
+79b82d065c46ef93cddb9d67f93dda43ce034bda/sof-cht.ri
+cbd99f0ff240cf9f5530b499f37c2e338437fe47/sof-cnl-v1.4.2.ldc
+cf6889b032e42bb6bf96fc98901105213b3d441f/sof-cnl-v1.4.2.ri
+1d14102e628d63c1594840453b194642cedf75f0/sof-icl-v1.4.2.ldc
+4ab0c7fbf02e20c5d45346bf416edc930b512ebf/sof-icl-v1.4.2.ri
+bc2e3e4dcb4bc964daf6907fdedf0dc0b1a9f595/sof-imx8.ldc
+16e716c74220689176d356e760829edc18e4e7f9/sof-imx8.ri
