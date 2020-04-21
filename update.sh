@@ -43,8 +43,8 @@ fi
 
 make generateupstream || { 2>&1 echo "Some upstream URLs cannot be fetched."; exit 1; }
 git diff
-echo -n "Press ENTER to commit, ^C to abort..."
-read BAILOUT
+#echo -n "Press ENTER to commit, ^C to abort..."
+#read BAILOUT
 
 git commit -a -m "$MSG"
 
