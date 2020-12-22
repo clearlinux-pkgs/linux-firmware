@@ -29,15 +29,22 @@ MSG="Update to"
 if [ "$LINUXFW" -eq 0 ]; then
     echo "Updating linux-firmware from $OLDVERSION to $VERSION"
 
-    echo sed -i -e "s/$OLDVERSION/$VERSION/g" linux-firmware.spec
-    sed -i -e "s/$OLDVERSION/$VERSION/g" linux-firmware.spec
+    sed_cmd="/^Version.*:/s/$OLDVERSION/$VERSION/g"
+    echo sed -i -e "$sed_cmd" linux-firmware.spec
+    sed -i -e "$sed_cmd" linux-firmware.spec
+
+    sed_cmd="s/linux-firmware-$OLDVERSION/linux-firmware-$VERSION/g"
+    echo sed -i -e "$sed_cmd" linux-firmware.spec
+    sed -i -e "$sed_cmd" linux-firmware.spec
+
     MSG="$MSG linux-firmware $VERSION"
 fi
 if [ "$UCODE" -eq 0 ]; then
     echo "Updating microcode from $UCOLDVERSION to $UCVERSION"
 
-    echo sed -i -e "s/$UCOLDVERSION/$UCVERSION/g" linux-firmware.spec
-    sed -i -e "s/$UCOLDVERSION/$UCVERSION/g" linux-firmware.spec
+    sed_cmd="s/microcode-$UCOLDVERSION/microcode-$UCVERSION/g"
+    echo sed -i -e "$sed_cmd" linux-firmware.spec
+    sed -i -e "$sed_cmd" linux-firmware.spec
     MSG="$MSG microcode $UCVERSION"
 fi
 
