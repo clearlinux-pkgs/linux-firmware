@@ -53,7 +53,7 @@ make generateupstream || { 2>&1 echo "Some upstream URLs cannot be fetched."; ex
 #echo -n "Press ENTER to commit, ^C to abort..."
 #read BAILOUT
 
+make bumpnogit
 git commit -a -m "$MSG"
 
-make bump
 make koji
