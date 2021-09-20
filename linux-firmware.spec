@@ -1,6 +1,6 @@
 Name:           linux-firmware
 Version:        20210919
-Release:        161
+Release:        162
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -9,6 +9,12 @@ Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-f
 Source10:       https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/microcode-20210608.tar.gz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
 Requires:       linux-firmware-doc
+
+# Force brp-strip* to be no-ops... beginning with rpm 4.17, the scripts try to
+# strip non-executable ELF content, which fails the build when attempting to
+# process *.nffw files (ELF content with unknown arch). But we should not be
+# stripping firmware files at all...
+%define __strip /bin/true
 
 %description
 This package includes firmware files required for some devices to
