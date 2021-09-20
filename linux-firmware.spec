@@ -25,7 +25,7 @@ Summary:        Firmware Licences files used by the Linux kernel
 Group:          kernel
 
 %description doc
-Licence files from frirmware files
+Licence files from firmware files
 
 %package extras
 Summary:        Firmware files used by the Linux kernel
@@ -40,7 +40,7 @@ Group:          kernel
 Requires:	wireless-regdb-master
 
 %description wifi
-Files from frirmware files
+Files from firmware files
 
 %package i915-cpio
 Summary:        cpio file with i915 firmware files
