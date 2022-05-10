@@ -56,4 +56,5 @@ make generateupstream || { 2>&1 echo "Some upstream URLs cannot be fetched."; ex
 make bumpnogit
 git commit -a -m "$MSG"
 
+export no_proxy="intel.com"
 make koji
