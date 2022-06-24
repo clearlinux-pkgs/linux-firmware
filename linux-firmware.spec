@@ -90,7 +90,7 @@ mkdir -p %{buildroot}/usr/lib/initrd.d
 mkdir -p cpio/usr/lib/firmware/i915
 ln    -s usr/lib  cpio/lib
 # copy the i915 DMC binaries
-cp -a %{buildroot}/usr/lib/firmware/i915/*_dmc_*  cpio/usr/lib/firmware/i915
+cp -a %{buildroot}/usr/lib/firmware/i915/*  cpio/usr/lib/firmware/i915
 (
   cd cpio
   find . | cpio --create --format=newc \
