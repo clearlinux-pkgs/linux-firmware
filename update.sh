@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e -o pipefail
 
 unset no_proxy
 LINUXFW=0
@@ -57,4 +58,4 @@ make bumpnogit
 git commit -a -m "$MSG"
 
 export no_proxy="intel.com"
-make koji
+make koji-nowait
