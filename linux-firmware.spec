@@ -94,7 +94,7 @@ cp -a %{buildroot}/usr/lib/firmware/i915/*  cpio/usr/lib/firmware/i915
 (
   cd cpio
   find . | cpio --create --format=newc \
-    | xz --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.xz
+    | zstd > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.zstd
 )
 
 mkdir -p intel-qat-cpio/usr/lib/firmware/
@@ -205,7 +205,7 @@ cat %{buildroot}/usr/lib/firmware/intel-ucode/* > intel-ucode-cpio/kernel/x86/mi
 
 %files i915-cpio
 %defattr(-,root,root,-)
-/usr/lib/initrd.d/i915-firmware.cpio.xz
+/usr/lib/initrd.d/i915-firmware.cpio.zstd
 
 %files qat-cpio
 %defattr(-,root,root,-)
