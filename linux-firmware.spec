@@ -1,6 +1,6 @@
 Name:           linux-firmware
 Version:        20221012
-Release:        179
+Release:        180
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -57,11 +57,11 @@ Group:          kernel
 CPIO file from qat_* firmware files
 
 %package ucode-cpio
-Summary:        cpio file with intel-ucode file
+Summary:        cpio file with Intel and AMD microcode
 Group:          kernel
 
 %description ucode-cpio
-CPIO file containing Intel microcode file, needed for early load
+CPIO file containing Intel and AMD microcode files, needed for early load
 
 %prep
 %setup -q -n linux-firmware-20221012
@@ -104,13 +104,14 @@ cp -a %{buildroot}/usr/lib/firmware/qat_*  intel-qat-cpio/usr/lib/firmware/
   find . | cpio --create --format=newc \
     | xz --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/qat-firmware.cpio.xz
 )
-# Create the intel-ucode CPIO file (cannot be compressed)
+# Create the early-ucode CPIO file (cannot be compressed)
 # See: https://www.kernel.org/doc/html/latest/x86/microcode.html
-mkdir -p intel-ucode-cpio/kernel/x86/microcode
-cat %{buildroot}/usr/lib/firmware/intel-ucode/* > intel-ucode-cpio/kernel/x86/microcode/GenuineIntel.bin
+mkdir -p early-ucode-cpio/kernel/x86/microcode
+cat %{buildroot}/usr/lib/firmware/intel-ucode/* > early-ucode-cpio/kernel/x86/microcode/GenuineIntel.bin
+cat %{buildroot}/usr/lib/firmware/amd-ucode/*.bin > early-ucode-cpio/kernel/x86/microcode/AuthenticAMD.bin
 (
-  cd intel-ucode-cpio
-  find . | cpio --create --format=newc --owner=0:0 > %{buildroot}/usr/lib/initrd.d/00-intel-ucode.cpio
+  cd early-ucode-cpio
+  find . | cpio --create --format=newc --owner=0:0 > %{buildroot}/usr/lib/initrd.d/00-early-ucode.cpio
 )
 
 %files
@@ -213,4 +214,4 @@ cat %{buildroot}/usr/lib/firmware/intel-ucode/* > intel-ucode-cpio/kernel/x86/mi
 
 %files ucode-cpio
 %defattr(-,root,root,-)
-/usr/lib/initrd.d/00-intel-ucode.cpio
+/usr/lib/initrd.d/00-early-ucode.cpio
