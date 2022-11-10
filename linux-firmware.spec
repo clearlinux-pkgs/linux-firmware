@@ -185,7 +185,6 @@ popd
 /usr/lib/firmware/mrvl
 /usr/lib/firmware/libertas
 /usr/lib/firmware/ti-connectivity
-/usr/lib/firmware/*wifi
 
 %files doc
 %defattr(-,root,root,-)
