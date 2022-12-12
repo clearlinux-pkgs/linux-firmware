@@ -1,6 +1,6 @@
 Name:           linux-firmware
 Version:        20221109
-Release:        184
+Release:        185
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -37,7 +37,8 @@ Files from firmware files
 %package wifi
 Summary:        Firmware files used by the Linux kernel
 Group:          kernel
-Requires:	wireless-regdb-master
+Requires:       linux-firmware
+Requires:       wireless-regdb-master
 
 %description wifi
 Files from firmware files
@@ -116,6 +117,13 @@ cat %{buildroot}/usr/lib/firmware/amd-ucode/*.bin > early-ucode-cpio/kernel/x86/
 
 pushd %{buildroot}/usr/lib/firmware
 find -type f | xargs -d '\n' zstd --rm -19
+find -type l | while read link; do
+  # Update symlinks to point to compressed bins
+  if ! [[ -f "$(readlink -f "${link}")" ]] && [[ -f "$(readlink -f "${link}").zst" ]]; then
+    ln -sf "$(readlink "${link}").zst" "${link}".zst
+    rm -f "${link}"
+  fi
+done
 popd
 
 %files
