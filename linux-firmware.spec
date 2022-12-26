@@ -95,7 +95,7 @@ cp -a %{buildroot}/usr/lib/firmware/i915/*  cpio/usr/lib/firmware/i915
 (
   cd cpio
   find . | cpio --create --format=newc \
-    | zstd > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.zstd
+    | xz > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.xz
 )
 
 mkdir -p intel-qat-cpio/usr/lib/firmware/
@@ -116,11 +116,11 @@ cat %{buildroot}/usr/lib/firmware/amd-ucode/*.bin > early-ucode-cpio/kernel/x86/
 )
 
 pushd %{buildroot}/usr/lib/firmware
-find -type f | xargs -d '\n' zstd --rm -19
+find -type f | xargs -d '\n' xz
 find -type l | while read link; do
   # Update symlinks to point to compressed bins
-  if ! [[ -f "$(readlink -f "${link}")" ]] && [[ -f "$(readlink -f "${link}").zst" ]]; then
-    ln -sf "$(readlink "${link}").zst" "${link}".zst
+  if ! [[ -f "$(readlink -f "${link}")" ]] && [[ -f "$(readlink -f "${link}").xz" ]]; then
+    ln -sf "$(readlink "${link}").xz" "${link}".xz
     rm -f "${link}"
   fi
 done
@@ -202,7 +202,7 @@ popd
 
 %files i915-cpio
 %defattr(-,root,root,-)
-/usr/lib/initrd.d/i915-firmware.cpio.zstd
+/usr/lib/initrd.d/i915-firmware.cpio.xz
 
 %files qat-cpio
 %defattr(-,root,root,-)
