@@ -95,7 +95,7 @@ cp -a %{buildroot}/usr/lib/firmware/i915/*  cpio/usr/lib/firmware/i915
 (
   cd cpio
   find . | cpio --create --format=newc \
-    | xz > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.xz
+    | xz -T1  --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.xz
 )
 
 mkdir -p intel-qat-cpio/usr/lib/firmware/
@@ -103,7 +103,7 @@ cp -a %{buildroot}/usr/lib/firmware/qat_*  intel-qat-cpio/usr/lib/firmware/
 (
   cd intel-qat-cpio
   find . | cpio --create --format=newc \
-    | xz --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/qat-firmware.cpio.xz
+    | xz -T1 --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/qat-firmware.cpio.xz
 )
 # Create the early-ucode CPIO file (cannot be compressed)
 # See: https://www.kernel.org/doc/html/latest/x86/microcode.html
@@ -116,7 +116,7 @@ cat %{buildroot}/usr/lib/firmware/amd-ucode/*.bin > early-ucode-cpio/kernel/x86/
 )
 
 pushd %{buildroot}/usr/lib/firmware
-find -type f | xargs -d '\n' xz
+find -type f | xargs -d '\n' xz -T1  --check=crc32 --lzma2=dict=512KiB
 find -type l | while read link; do
   # Update symlinks to point to compressed bins
   if ! [[ -f "$(readlink -f "${link}")" ]] && [[ -f "$(readlink -f "${link}").xz" ]]; then
