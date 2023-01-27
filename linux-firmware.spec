@@ -90,12 +90,13 @@ rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
 mkdir -p %{buildroot}/usr/lib/initrd.d
 mkdir -p cpio/usr/lib/firmware/i915
 ln    -s usr/lib  cpio/lib
-# copy the i915 DMC binaries
+# copy the i915 DMC binaries, use -9e for maximum compression, systems
+# nowdays have more than enough memory to compress and decompress with -9e
 cp -a %{buildroot}/usr/lib/firmware/i915/*  cpio/usr/lib/firmware/i915
 (
   cd cpio
   find . | cpio --create --format=newc \
-    | xz -T1  --check=crc32 --lzma2=dict=512KiB > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.xz
+    | xz -T1 --check=crc32 --lzma2=dict=512KiB -9e > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.xz
 )
 
 mkdir -p intel-qat-cpio/usr/lib/firmware/
