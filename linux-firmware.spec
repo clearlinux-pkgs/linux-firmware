@@ -1,11 +1,11 @@
 Name:           linux-firmware
-Version:        20230117
-Release:        190
+Version:        20230210
+Release:        191
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20230117.tar.gz
+Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20230210.tar.gz
 Source10:       https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/microcode-20221108.tar.gz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
 Requires:       linux-firmware-doc
@@ -65,7 +65,7 @@ Group:          kernel
 CPIO file containing Intel and AMD microcode files, needed for early load
 
 %prep
-%setup -q -n linux-firmware-20230117
+%setup -q -n linux-firmware-20230210
 
 
 %install
