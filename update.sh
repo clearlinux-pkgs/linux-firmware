@@ -8,7 +8,7 @@ VERSION=`git ls-remote -q --refs https://git.kernel.org/pub/scm/linux/kernel/git
 OLDVERSION=`grep ^Version linux-firmware.spec | cut -d: -f2 | sed 's/ //g'`
 
 UCVERSION=`git ls-remote -q --refs https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files | tail -n 1 | sed 's/.*microcode-\([0-9]*\)/\1/'`
-UCOLDVERSION=`grep ^Source10 linux-firmware.spec | sed 's/.*microcode-\([0-9]*\)\.tar\.gz/\1/'`
+UCOLDVERSION=`grep ^Source10 linux-firmware.spec | sed 's/.*microcode-\([0-9a-f]*\)\.tar\.gz/\1/'`
 
 echo "--linux-firmware: $VERSION--"
 if [ "$VERSION" == "$OLDVERSION" ] ; then
