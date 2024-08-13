@@ -1,6 +1,6 @@
 Name:           linux-firmware
 Version:        20240811
-Release:        219
+Release:        220
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -86,6 +86,7 @@ cp -a sound-open-firmware-binaries-1.1-apl/* %{buildroot}/usr/lib/firmware/intel
 
 # Remove unmaintained firmware
 rm -f %{buildroot}/usr/lib/firmware/phanfw.bin
+rm -f %{buildroot}/usr/lib/firmware/mediatek/mt8195/scp.img
 
 # Create the i915 CPIO file
 mkdir -p %{buildroot}/usr/lib/initrd.d
