@@ -1,0 +1,26 @@
+From 8d0f03242b3519c07c8e921be01ddc52b0064b5f Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Wed, 23 Oct 2024 11:19:55 -0700
+Subject: [PATCH] Compress firmware with ZST by default
+
+---
+ Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 033e3fb671d3..b9f14627b1c6 100644
+--- a/Makefile
++++ b/Makefile
+@@ -29,7 +29,8 @@ rpm:
+ dedup:
+ 	./dedup-firmware.sh $(DESTDIR)$(FIRMWAREDIR)
+ 
+-install:
++install: install-zst
++install-uncompressed:
+ 	install -d $(DESTDIR)$(FIRMWAREDIR)
+ 	./copy-firmware.sh $(DESTDIR)$(FIRMWAREDIR)
+ 	@echo "Now run \"make dedup\" to de-duplicate any firmware files"
+-- 
+2.47.0
+

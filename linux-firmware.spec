@@ -11,6 +11,7 @@ Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1
 Requires:       linux-firmware-doc
 BuildRequires:	rdfind
 
+Patch0001:	0001-Compress-firmware-with-ZST-by-default.patch
 Patch1001:	backport-2f0464118f404b8adc4e245a4903c9a1385e00b0-check_whence.py_skip_some_validation_if_git_ls-files_fails.patch
 
 # Force brp-strip* to be no-ops... beginning with rpm 4.17, the scripts try to
@@ -70,12 +71,14 @@ CPIO file containing Intel and AMD microcode files, needed for early load
 %prep
 %setup -q -n linux-firmware-20241017
 
+%patch -P 0001 -p1
 %patch -P 1001 -p1
 
 %install
 mkdir -p %{buildroot}/usr/share/doc/linux-firmware
 cp WHENCE LICENS* GPL* %{buildroot}/usr/share/doc/linux-firmware
 %make_install FIRMWAREDIR=/usr/lib/firmware
+make DESTDIR=%{buildroot}/usr dedup
 tar -axf %{SOURCE10}
 cp -a Intel-Linux-Processor-Microcode-Data-Files-microcode-*/intel-ucode %{buildroot}/usr/lib/firmware
 
@@ -100,16 +103,14 @@ ln    -s usr/lib  cpio/lib
 cp -a %{buildroot}/usr/lib/firmware/i915/*  cpio/usr/lib/firmware/i915
 (
   cd cpio
-  find . | cpio --create --format=newc \
-    | zstd > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.zst
+  find . | cpio --create --format=newc > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio
 )
 
 mkdir -p intel-qat-cpio/usr/lib/firmware/
 cp -a %{buildroot}/usr/lib/firmware/qat_*  intel-qat-cpio/usr/lib/firmware/
 (
   cd intel-qat-cpio
-  find . | cpio --create --format=newc \
-    | zstd > %{buildroot}/usr/lib/initrd.d/qat-firmware.cpio.zst
+  find . | cpio --create --format=newc  > %{buildroot}/usr/lib/initrd.d/qat-firmware.cpio
 )
 # Create the early-ucode CPIO file (cannot be compressed)
 # See: https://www.kernel.org/doc/html/latest/x86/microcode.html
@@ -120,17 +121,6 @@ cat %{buildroot}/usr/lib/firmware/amd-ucode/*.bin > early-ucode-cpio/kernel/x86/
   cd early-ucode-cpio
   find . | cpio --create --format=newc --owner=0:0 > %{buildroot}/usr/lib/initrd.d/00-early-ucode.cpio
 )
-
-pushd %{buildroot}/usr/lib/firmware
-#find -type f | xargs -d '\n' xz -T1  --check=crc32 --lzma2=dict=512KiB
-#find -type l | while read link; do
-#  # Update symlinks to point to compressed bins
-#  if ! [[ -f "$(readlink -f "${link}")" ]] && [[ -f "$(readlink -f "${link}").xz" ]]; then
-#    ln -sf "$(readlink "${link}").xz" "${link}".xz
-#    rm -f "${link}"
-#  fi
-#done
-popd
 
 %files
 %defattr(-,root,root,-)
@@ -208,11 +198,11 @@ popd
 
 %files i915-cpio
 %defattr(-,root,root,-)
-/usr/lib/initrd.d/i915-firmware.cpio.zst
+/usr/lib/initrd.d/i915-firmware.cpio
 
 %files qat-cpio
 %defattr(-,root,root,-)
-/usr/lib/initrd.d/qat-firmware.cpio.zst
+/usr/lib/initrd.d/qat-firmware.cpio
 
 %files ucode-cpio
 %defattr(-,root,root,-)
