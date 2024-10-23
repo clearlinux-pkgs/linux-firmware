@@ -100,14 +100,16 @@ ln    -s usr/lib  cpio/lib
 cp -a %{buildroot}/usr/lib/firmware/i915/*  cpio/usr/lib/firmware/i915
 (
   cd cpio
-  find . | cpio --create --format=newc > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio
+  find . | cpio --create --format=newc \
+    | zstd > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio.zst
 )
 
 mkdir -p intel-qat-cpio/usr/lib/firmware/
 cp -a %{buildroot}/usr/lib/firmware/qat_*  intel-qat-cpio/usr/lib/firmware/
 (
   cd intel-qat-cpio
-  find . | cpio --create --format=newc  > %{buildroot}/usr/lib/initrd.d/qat-firmware.cpio
+  find . | cpio --create --format=newc \
+    | zstd > %{buildroot}/usr/lib/initrd.d/qat-firmware.cpio.zst
 )
 # Create the early-ucode CPIO file (cannot be compressed)
 # See: https://www.kernel.org/doc/html/latest/x86/microcode.html
@@ -206,11 +208,11 @@ popd
 
 %files i915-cpio
 %defattr(-,root,root,-)
-/usr/lib/initrd.d/i915-firmware.cpio
+/usr/lib/initrd.d/i915-firmware.cpio.zst
 
 %files qat-cpio
 %defattr(-,root,root,-)
-/usr/lib/initrd.d/qat-firmware.cpio
+/usr/lib/initrd.d/qat-firmware.cpio.zst
 
 %files ucode-cpio
 %defattr(-,root,root,-)
