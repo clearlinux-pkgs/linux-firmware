@@ -11,6 +11,8 @@ Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1
 Requires:       linux-firmware-doc
 BuildRequires:	rdfind
 
+Patch1001:	backport-2f0464118f404b8adc4e245a4903c9a1385e00b0-check_whence.py_skip_some_validation_if_git_ls-files_fails.patch
+
 # Force brp-strip* to be no-ops... beginning with rpm 4.17, the scripts try to
 # strip non-executable ELF content, which fails the build when attempting to
 # process *.nffw files (ELF content with unknown arch). But we should not be
@@ -68,6 +70,7 @@ CPIO file containing Intel and AMD microcode files, needed for early load
 %prep
 %setup -q -n linux-firmware-20241017
 
+%patch -P 1001 -p1
 
 %install
 mkdir -p %{buildroot}/usr/share/doc/linux-firmware
