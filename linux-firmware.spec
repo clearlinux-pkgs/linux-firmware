@@ -1,6 +1,6 @@
 Name:           linux-firmware
 Version:        20241017
-Release:        224
+Release:        225
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
