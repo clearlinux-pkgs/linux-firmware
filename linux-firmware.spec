@@ -103,7 +103,10 @@ ln    -s usr/lib  cpio/lib
 cp -a %{buildroot}/usr/lib/firmware/i915/*  cpio/usr/lib/firmware/i915
 (
   cd cpio
+  find . -type f -name '*.zst' -exec unzstd --rm {} \;
+  find . -type l -name '*.zst' | while read link; do target=$(readlink "${link}"); ln -s "${target%.zst}" "${link%.zst}"; rm "${link}"; done
   find . | cpio --create --format=newc > %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio
+  zstd --rm %{buildroot}/usr/lib/initrd.d/i915-firmware.cpio
 )
 
 mkdir -p intel-qat-cpio/usr/lib/firmware/
@@ -198,7 +201,7 @@ cat %{buildroot}/usr/lib/firmware/amd-ucode/*.bin > early-ucode-cpio/kernel/x86/
 
 %files i915-cpio
 %defattr(-,root,root,-)
-/usr/lib/initrd.d/i915-firmware.cpio
+/usr/lib/initrd.d/i915-firmware.cpio.zst
 
 %files qat-cpio
 %defattr(-,root,root,-)
