@@ -1,0 +1,11 @@
+--- linux-firmware-20241210/copy-firmware.sh~	2024-12-10 16:54:41.000000000 +0000
++++ linux-firmware-20241210/copy-firmware.sh	2025-01-06 15:21:43.085545095 +0000
+@@ -41,7 +41,7 @@
+                 err "cannot mix XZ and ZSTD compression"
+             fi
+             # shellcheck disable=SC2209
+-            compress="zstd --compress --quiet --stdout"
++            compress="zstd --compress --quiet --rsyncable --stdout"
+             compext=".zst"
+             shift
+             ;;

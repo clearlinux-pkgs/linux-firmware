@@ -12,6 +12,7 @@ Requires:       linux-firmware-doc
 BuildRequires:	rdfind
 
 Patch0001:	0001-Compress-firmware-with-ZST-by-default.patch
+Patch0002:	zstd-rsyncable.patch
 Patch1001:	backport-2f0464118f404b8adc4e245a4903c9a1385e00b0-check_whence.py_skip_some_validation_if_git_ls-files_fails.patch
 
 # Force brp-strip* to be no-ops... beginning with rpm 4.17, the scripts try to
@@ -72,6 +73,7 @@ CPIO file containing Intel and AMD microcode files, needed for early load
 %setup -q -n linux-firmware-20241210
 
 %patch -P 0001 -p1
+%patch -P 0002 -p1
 %patch -P 1001 -p1
 
 %install
