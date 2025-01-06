@@ -8,19 +8,15 @@ Subject: [PATCH] Compress firmware with ZST by default
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 033e3fb671d3..b9f14627b1c6 100644
---- a/Makefile
-+++ b/Makefile
-@@ -29,7 +29,8 @@ rpm:
+--- linux-firmware-20241210/Makefile~	2024-12-10 16:54:41.000000000 +0000
++++ linux-firmware-20241210/Makefile	2025-01-06 15:27:32.651259108 +0000
+@@ -29,7 +29,8 @@
  dedup:
  	./dedup-firmware.sh $(DESTDIR)$(FIRMWAREDIR)
  
 -install:
 +install: install-zst
 +install-uncompressed:
- 	install -d $(DESTDIR)$(FIRMWAREDIR)
- 	./copy-firmware.sh $(DESTDIR)$(FIRMWAREDIR)
- 	@echo "Now run \"make dedup\" to de-duplicate any firmware files"
--- 
-2.47.0
-
+ 	@if [ -n "${COPYOPTS}" ]; then \
+ 		echo "COPYOPTS is not used since linux-firmware-20241017!"; \
+ 		echo "You may want to use install{-xz,-zst} and dedup targets instead"; \
