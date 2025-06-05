@@ -1,6 +1,6 @@
 Name:           linux-firmware
 Version:        20250509
-Release:        238
+Release:        239
 License:        GPL-1.0+ GPL-2.0+ MIT Distributable
 Summary:        Firmware files used by the Linux kernel
 Url:            http://www.kernel.org/
@@ -9,6 +9,8 @@ Source0:        https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-f
 Source10:       https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/microcode-20250512.tar.gz
 Source11:       https://github.com/intel/sound-open-firmware-binaries/archive/v1.1-apl.tar.gz
 Requires:       linux-firmware-doc
+Requires:       linux-firmware-i915-cpio
+Requires:       linux-firmware-ucode-cpio
 BuildRequires:	rdfind
 
 Patch0001:	0001-Compress-firmware-with-ZST-by-default.patch
